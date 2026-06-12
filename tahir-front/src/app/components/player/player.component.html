@@ -1,0 +1,48 @@
+<div class="container">
+
+  <div class="header">
+    <h1>SkipAd</h1>
+    <p>Saute automatiquement les pubs dans les séries africaines</p>
+  </div>
+
+  <!-- Toggle skip -->
+  <div class="toggle-card">
+    <div class="toggle-info">
+      <span class="toggle-label">Skip automatique</span>
+      <span class="toggle-sub">EvenProd · Marodi · et plus</span>
+    </div>
+    <label class="switch">
+      <input
+        type="checkbox"
+        [(ngModel)]="skipEnabled"
+        (change)="onToggleChange()">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <!-- Saisie URL -->
+  <div class="input-card">
+    <label>Lien YouTube</label>
+    <div class="input-row">
+      <input
+        type="text"
+        [(ngModel)]="youtubeUrl"
+        placeholder="https://www.youtube.com/watch?v=..."
+        (keyup.enter)="onLoadVideo()">
+      <button (click)="onLoadVideo()">Charger</button>
+    </div>
+    <p class="message" *ngIf="message">{{ message }}</p>
+  </div>
+
+  <!-- Segments trouvés -->
+  <div class="segments-card" *ngIf="segments.length > 0">
+    <h2>Segments de pub détectés</h2>
+    <div class="segment" *ngFor="let seg of segments; let i = index">
+      <span class="seg-num">Pub {{ i + 1 }}</span>
+      <span class="seg-time">{{ seg.start }}s → {{ seg.end }}s</span>
+      <span class="seg-dur">{{ seg.end - seg.start }}s</span>
+      <span class="seg-src">{{ seg.source }}</span>
+    </div>
+  </div>
+
+</div>
